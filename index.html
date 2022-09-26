@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora CDP</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
+<body>
+    <header>
+        <nav class="nav">
+            <a href="#" class="logo">Calculadora</a>
+        </nav>
+    </header>
+    <main>
+
+        <section class="principal">
+            <form method="get" id="form">
+
+                <!-- INFORMAÇÕES ESSENCIAIS  -->
+                <section class="sec1" id="first-sec">
+                    <h2 class="h2"><span class="material-symbols-rounded">
+                        payments
+                        </span> 
+                    Informações Essenciais
+                    </h2>
+                    <p class="nome">
+                        <div class="first">
+                            <p class="color">Salário Base</p> 
+                            <mark id="atencao">(Use "." ao invés da vírgula)</mark>
+                        </div>
+                        <div class="flex">
+                            <ion-icon name="return-down-forward-outline"></ion-icon>
+                            <div class="search">
+                                <input type="number" name="salariobase" id="salario-base" class="porc" placeholder="R$0.00" required>
+                            </div>
+                        </div>
+                    </p>
+                    <p class="nome">
+                        <p class="color">% Horas Extras</p>
+                        <div class="flex">
+                            <ion-icon name="return-down-forward-outline"></ion-icon>
+                            <div class="search">
+                                <input type="number" name="porcentagem" id="porcentagem" placeholder="Ex: 1.5 para 50%, ou 2 para 100%" class="porc" min="1" step="0.1" required>
+                            </div>
+                        </div>
+                    </p>
+                    <p class="nome">
+                        <p class="color">Jornada</p>
+                        <ion-icon name="return-down-forward-outline"></ion-icon><select name="jornada" id="jornada" required>
+                            <option value="220 horas">220 Horas</option>
+                            <option value="180 horas">180 Horas</option>
+                        </select>
+                    </p>
+                </section>
+                
+                <!-- QTD. HORAS EXTRAS -->
+                <section class="sec2">
+                    <h2 class="h2"><ion-icon name="time-outline"></ion-icon> Qtd. Horas Extras</h2>
+                    <p class="nome">
+                        <p class="color">Horas Extras</p>
+                        <div class="flex">
+                            <ion-icon name="return-down-forward-outline"></ion-icon>
+                            <div class="search">
+                                <input type="number" name="horas-extras" id="horas-extras" class="he-info" required>
+                            </div>
+                        </div>
+                        <p class="color">Minutos Extras </p>
+                        <div class="flex">
+                            <ion-icon name="return-down-forward-outline"></ion-icon>
+                            <div class="search">
+                                <input type="number" name="minutos-extras" id="minutos-extras" class="he-info">
+                            </div>
+                        </div>
+                    </p>
+                    <p class="nome">
+                        <p class="color">Faltas Horas </p>
+                        <div class="flex">
+                            <ion-icon name="return-down-forward-outline"></ion-icon>
+                            <div class="search">
+                                <input type="number" name="faltas" id="faltas" class="he-info">
+                            </div>
+                        </div>
+                    </p>
+                </section>
+
+                <section class="sec3">
+                    <h2 class="h2"><ion-icon name="calendar-clear-outline"></ion-icon> Dias Trabalhados</h2>
+                    <p class="nome">
+                        <p class="color">Dias Úteis <mark class="red">*</mark></p>
+                        <div class="flex">
+                            <ion-icon name="return-down-forward-outline"></ion-icon>
+                            <div class="search">
+                                <input type="number" name="dias-uteis" id="dias-uteis" min="1" max="30" placeholder="Dias Trabalhados" required>
+                            </div>
+                        </div>
+                        <p class="color">DSR <mark class="red">*</mark></p>
+                        <div class="flex">
+                            <ion-icon name="return-down-forward-outline"></ion-icon>
+                            <div class="search">
+                                <input type="number" name="dsr" id="dsr" placeholder="Domingos e Feriados" min="1" max="30" required>
+                            </div>
+                        </div>
+                    </p>
+                </section>
+
+                <!-- Crianças -->
+                <section class="sec4">
+                    <h2 class="h2">
+                        <span class="material-symbols-rounded">
+                        child_care
+                        </span>
+                    Salário Família
+                    </h2>
+                    <p class="nome">
+                        <p class="color">Quantidade Filhos</p>
+                        <div class="flex">
+                            <ion-icon name="return-down-forward-outline"></ion-icon>
+                            <div class="search">
+                                <input type="number" step="1" placeholder="Somente até 14 anos" name="horas-extras" id="qtd-filhos" class="he-info">
+                            </div>
+                        </div>
+                </section>
+
+                <!-- OUTROS ADICIONAIS -->
+
+                <section class="sec5">
+                    <h2 class="h2"><ion-icon name="pricetag-outline"></ion-icon> Outros Adicionais</h2>
+                    <p>
+                        <label for="insalubridade">Grau Insalubridade </label> <br>
+                        <ion-icon name="return-down-forward-outline"></ion-icon><select name="insalubridade" id="insalubridade">
+                            <option value="Não Há Insalubridade">Não Há Insalubridade</option>
+                            <option value="Mínimo">10% Sobre Salário Mínimo</option>
+                            <option value="Médio">20% Sobre Salário Mínimo</option>
+                            <option value="Máximo">40% Sobre Salário Mínimo</option>
+                        </select>
+                    </p>
+                    <p>
+                        <label for="periculosidade">Periculosidade </label> <br>
+                        <ion-icon name="return-down-forward-outline"></ion-icon><select name="periculosidade" id="periculosidade">
+                            <option value="Não há Periculosidade">Não Há Periculosidade</option>
+                            <option value="Há Periculosidade">30% Sobre Salário Base</option>
+                        </select>
+                    </p>
+                    <p>
+                        <label for="horas-noturnas">Qtd. Horas Noturnas </label> <br>
+                        <div class="flex">
+                            <ion-icon name="return-down-forward-outline"></ion-icon><input type="number" name="horas-noturnas" id="horas-noturnas" class="noturno" placeholder="20% Adicional">
+                        </div>
+                    </p>
+                </section>
+
+                <!-- VALE TRANSPORTE -->
+
+                <section class="sec6">
+                    <h2 class="h2"><ion-icon name="bus-outline"></ion-icon> Vale Transporte</h2>
+                    <p>
+                        <label for="valor-passagem">Valor Unitário da Passagem </label> <br>
+                        <div class="flex">
+                            <ion-icon name="return-down-forward-outline"></ion-icon><input type="number" name="valor-passagem" id="valor-passagem" class="noturno" placeholder="Valor de cada Passagem">
+                        </div>
+                    </p>
+                    <p>
+                        <label for="qtd-passagens">Quantidade de Passagens Mensais </label> <br>
+                        <div class="flex">
+                            <ion-icon name="return-down-forward-outline"></ion-icon><input type="number" name="qtd-passagens" id="qtd-passagens" class="noturno" placeholder="Considerar o Total Mensal">
+                        </div>
+                    </p>
+                </section>
+
+
+                <div class="descricao">
+                    <span class="material-symbols-rounded">
+                        analytics
+                    </span>
+                    <p>Preencha todas as Informações para Saber Qual será o Salário Total dessa Pessoa!</p>
+                </div>
+
+                <p class="baixo">
+                    <input type="button" value="Enviar" class="enviar">
+                    <input type="reset" value="Limpar" class="limpar">
+                </p>
+
+            </form>
+
+            <section class="oculto">
+                <h2 class="title-info">
+                    Informações
+                </h2>
+                <div class="menu-indices">
+                    <div class="indice1">
+                        Salário Base
+                        <p id="value-salario-base">R$ 0.00 </p>
+                    </div>
+                    <div class="indice2">
+                        Benefícios
+                        <p id="value-beneficios">R$ 0.00 </p>
+                    </div>
+                    <div class="indice3"> 
+                        Descontos
+                        <p id="value-descontos">R$ 0.00</p>
+                    </div>
+                </div>
+                <div id="info1">
+                    <p class="text-salario-total">Salario Total</p>
+                    <p id="salario-total"></p>
+                </div>
+                <div class="menu-info">
+                    <div id="info2">
+                        <p class="text-info">Valor HE</p>
+                        <p id="valor-he"></p>
+                    </div>
+                    <div id="info3">
+                        <p class="text-info">Valor DSR</p>
+                        <p id="valor-dsr"></p>
+                    </div>
+                </div>
+                <div class="menu-info">
+                    <div id="info4">
+                        <p class="text-info">Insalubridade</p>
+                        <p id="valor-insalubridade"></p>
+                    </div>
+                    <div id="info5">
+                        <p class="text-info">Periculosidade</p>
+                        <p id="valor-periculosidade"></p>
+                    </div>
+                </div>
+                <div class="menu-info">
+                    <div id="info6">
+                        <p class="text-info">Salário Família</p>
+                        <p id="valor-salario-familia"></p>
+                    </div>
+                    <div id="info7">
+                        <p class="text-info">Adicional Noturno</p>
+                        <p id="valor-noturno"></p>
+                    </div>
+                </div>
+                <div class="menu-info">
+                    <div id="info8">
+                        <p class="text-info">Gasto VT Empregado</p>
+                        <p id="valor-vt-empregado"></p>
+                    </div>
+                    <div id="info9">
+                        <p class="text-info">Gasto VT Empregador</p>
+                        <p id="valor-vt-empregador"></p>
+                    </div>
+                </div>
+            </section>
+
+        </section>
+    </main>
+    <script src="main.js"></script>
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script>
+        ScrollReveal({
+            reset: false,
+            distance: '60px',
+            duration: 2500,
+            delay: 400
+        })
+
+        ScrollReveal().reveal('.sec3', { delay: 500, origin: 'top', interval: 100 });
+        ScrollReveal().reveal('.sec4', { delay: 500, origin: 'top', interval: 100 });
+        ScrollReveal().reveal('.sec5', { delay: 500, origin: 'top', interval: 100 });
+        ScrollReveal().reveal('.sec6', { delay: 500, origin: 'top', interval: 100 });
+    </script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+</html>

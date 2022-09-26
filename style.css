@@ -1,0 +1,421 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Poppins&family=Varela+Round&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 18.5px;
+    font-family: 'Poppins', sans-serif;
+    color: #152329;
+}
+
+/* RESPOSTAS (OCULTO) */
+
+.oculto {
+    border-radius: 10px;
+    padding: 25px;
+    width: 450px;
+    background: white;
+    margin: auto;
+    display: none;
+}
+
+.title-info {
+    color: #3740a1;
+    text-align: center;
+    cursor: pointer;
+    font-size: 22.5px;
+}
+
+#salario-total {
+    font-weight: bold;
+    font-size: 20px;
+    color: #2a35c0;
+    text-align: center;
+    padding: 7.5px;
+    border-bottom: 2px solid #ddb279;
+}
+
+.text-salario-total {
+    text-align: center;
+}
+
+.text-info {
+    text-align: left;
+}
+
+.menu-info {
+    margin-top: 35px;
+    align-items: center;
+    justify-content: space-around;
+    display: flex;
+}
+
+#info1 {
+    margin: auto;
+    width: 125px;
+    margin-top: 25px;
+}
+
+#info2, 
+#info3 {
+    padding: 5px;
+    background: #f4fdfc8f;
+    width: 130px;
+    padding-left: 10px;
+    border-left: 2px solid #878ecc;
+}
+
+#valor-he,
+#valor-dsr {
+    color: #2a35c0;
+}
+
+#info4,
+#info5,
+#info6,
+#info7,
+#info8,
+#info9 {
+    padding: 5px;
+    background: #f4fdfc;
+    width: 130px;
+    padding-left: 10px;
+    border-left: 2px solid #878ecc;
+}
+
+#valor-insalubridade,
+#valor-periculosidade,
+#valor-salario-familia,
+#valor-noturno,
+#valor-vt-empregado,
+#valor-vt-empregador {
+    color: #2a35c0;
+}
+
+
+/* MENU INDICES */
+
+.menu-indices {
+    padding-bottom: 40px;
+    border-bottom: 1px solid #596b7446;
+    margin: auto;
+    width: 400px;
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.indice1 {
+    font-size: 15.5px;
+    display: grid;
+    text-align: center;
+    justify-content: center;
+    place-items: center;
+    color: white;
+    width: 100px;
+    height: 100px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 35%;
+    background: #8377cc;
+    padding: 10px;
+}
+
+.indice2 {
+    font-size: 15.5px;
+    display: grid;
+    text-align: center;
+    justify-content: center;
+    place-items: center;
+    color: white;
+    width: 100px;
+    height: 100px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 35%;
+    background: #f9a3be;
+    padding: 10px;
+}
+
+.indice3 {
+    font-size: 15.5px;
+    display: grid;
+    text-align: center;
+    justify-content: center;
+    place-items: center;
+    color: white;
+    width: 100px;
+    height: 100px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 35%;
+    background: #ec9896;
+    padding: 10px;
+}
+
+#value-descontos,
+#value-beneficios,
+#value-salario-base {
+    font-weight: bold;
+    font-size: 18.25px;
+    color: white;
+}
+
+/* CONFIGURAÇÕES NAVBAR */
+
+.nav {
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 75px;
+    background: #232d79;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 125px;
+    position: relative !important;
+}
+
+.logo {
+    font-size: 35px;
+    font-weight: bold;
+    color: white;
+}
+
+/* CONFIGURAÇÕES DE TEXTOS */
+
+.h2 {
+    cursor: pointer;
+    color: #3740a1; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px;
+    margin-bottom: 35px;
+}
+
+.nome {
+    color: #596b74;
+}
+
+.color {
+    color: #1c2a38;
+}
+
+.first {
+    display: flex;
+}
+
+.first mark {
+    margin-left: 5px;
+}
+
+.red {
+    color: #bb4562;
+    background: none;
+    text-decoration: none;
+}
+
+#atencao {
+    text-decoration: none;
+    background: none;
+    text-align: center;
+    color: #f16a94;
+}
+
+.descricao {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    margin: auto;
+    padding: 15px;
+    border-radius: 10px;
+    width: 500px;
+    background: #d6e0f9;
+    color: #7b83ce;
+}
+ 
+.descricao p {
+    margin-left: 25px  ;
+    color: #646bac;   
+}
+
+/* CONFIGURAÇÕES GERAIS */
+
+.flex {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+}
+
+ion-icon {
+    margin-right: 15px;
+    color: #2a35c0;
+    margin-right: 4px;
+}
+
+a {
+    text-decoration: none;
+}
+
+body {
+    margin: auto;
+    width: 750px;
+    background: #f2f3f8
+}
+
+.principal {
+    padding: 50px;
+    padding-top: 125px;
+    margin-top: -100px;
+    background: #f2f3f8;
+    border-radius: 20px;
+}
+
+/* DETALHES SECTIONS */
+
+#first-sec {
+    margin-top: 50px;
+}
+
+.sec1,
+.sec2,
+.sec3,
+.sec4,
+.sec5,
+.sec6 {
+    margin: auto;
+    width: 450px;
+    border-top-right-radius: 25%;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding: 25px;
+    margin-bottom: 50px;
+    background: white;
+}
+
+/* FORMULÁRIOS */
+
+input {
+    margin-left: 15px;
+    width: 100%;
+    padding: 4.5px;
+    margin-top: 7.5px;
+    border: 0.5px solid #28183d54;
+    border-radius: 7.5px;
+    color: #1c2a38;
+}
+
+.search {
+    position: relative;
+    width: 326px;
+    background-color: white;
+    display: flex;
+}
+
+.search:before {
+    margin-left: 15px;
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 95%;
+    height: 2px;
+    background: #3740a1;
+    transform: scaleX(0);
+    transform-origin: center;
+    transform-origin: left;
+    transition: transform .25s;
+}
+
+.search:focus-within::before {
+    transform: scale(1);
+}
+
+.search input {
+    outline: none;
+}
+
+select {
+    color: #1c2a38b2;
+    width: 310px;
+    padding: 3.5px;
+    margin-top: 7.5px;
+    margin-bottom: 7.5px;
+    margin-left: 15px;
+    border: 0.5px solid #28183d54;
+    border-radius: 7.5px;
+    transition-timing-function: ease-in-out;
+    transition-duration: 0.2s;
+}
+
+select:hover,
+select:focus,
+select:active,
+select:checked {
+  color: #1c2a38;
+}
+
+.porc {
+    width: 300px;
+}
+
+.noturno {
+    width: 300px;
+}
+
+.baixo {
+    margin-top: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.enviar {
+    margin-bottom: 75px;
+    box-shadow: 1px 7px 7px 3px #1c2a3854;
+    border: none;
+    width: 150px;
+    color: white;
+    background: #be436a;
+    cursor: pointer;
+    transition-timing-function: ease-in-out;
+    transition-duration: 0.25s;
+}
+
+.enviar:hover {
+    box-shadow: none;
+    background: #97344d;
+}
+
+.limpar {
+    box-shadow: 1px 7px 7px 3px #1c2a3854;
+    border: none;
+    width: 150px;
+    color: white;
+    background: #be436a;
+    cursor: pointer;
+    transition-timing-function: ease-in-out;
+    transition-duration: 0.25s;
+    margin-bottom: 75px;
+}
+
+.limpar:hover {
+    box-shadow: none;
+    background: #97344d;
+}
+
+/* ICONS */
+
+.material-symbols-rounded {
+}
+
+span {
+    margin-right: 3.5px;
+    color: #2a35c0;
+}
