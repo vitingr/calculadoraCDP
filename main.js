@@ -118,6 +118,55 @@ function GastoEmpregador(salario, valor_passagens, qtd_passagens) {
     }
 }
 
+// INSS
+function CalculoINSS(salario_total) {
+    if (salario_total > 7087.22) {
+        return 828.38
+    } else {
+        if (salario_total == 1212) {
+            return 90.90
+        } else {
+            if (salario_total > 1212 && salario_total <= 2427.35) {
+                let valor1 = salario_total - 1212
+                let valor2 = ((valor1 / 100) * 9)
+                console.log(valor1)
+                console.log(valor2)
+                return (casasDecimais(valor2, 2) + 90.90)
+            } else {
+                if (salario_total > 2427.35 && salario_total <= 3641.03) {
+                    let valor1 = 90.90
+                    let valor2 = 109.38
+                    let valor3 = salario_total - 2427.35
+                    let valor4 = ((valor3 / 100) * 12)
+                    console.log(valor1)
+                    console.log(valor2)
+                    console.log(valor3)
+                    console.log(valor4)
+                    return ((casasDecimais(valor4, 2)) + 90.90 + 109.38)
+                } else {
+                    if (salario_total > 2641.03 <= 7087.22) {
+                        let valor1 = 90.90
+                        let valor2 = 109.38
+                        let valor3 = 145.64
+                        let valor4 = salario_total - 3641.03
+                        let valor5 = ((valor4 / 100) * 14)
+                        return ((casasDecimais(valor5, 2)) + 90.90 + 109.38 + 145.64)
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Função Não Arrendondar
+
+function casasDecimais(num, precisao) {
+    var casas = Math.pow(10, precisao);
+    return Math.floor(num * casas) / casas;
+};
+
+console.log(casasDecimais(10.56785, 2))
+
 // Salário Total
 let botao = document.querySelector(".enviar")
 botao.addEventListener("click", (e) => {
@@ -154,23 +203,56 @@ botao.addEventListener("click", (e) => {
     let Salario_Familia = SalarioFamilia(salario, filhos)
     let gasto_empregado = GastoEmpregado(salario, valor_passagens, qtd_passagens)
     let gasto_empregador = GastoEmpregador(salario, valor_passagens, qtd_passagens)
-    let total = (Number(salario) + Number(valorHe) + Number(valorDSR) + Number(maior) + Number(valorNoturno) - Number(gasto_empregado))
+    let total = (Number(salario))
     if (salario <= 1655.98) {
         total += Number(Salario_Familia)
     } else {
         console.log("Não recebe!")
     }
+    
+    if (Number(valorHe) > 0) {
+        total += Number(valorHe)
+    } else {
+        total = total
+    }
+
+    if (Number(valorDSR) > 0) {
+        total += Number(valorDSR)
+    } else {
+        total = total
+    }
+
+    if (Number(maior) > 0) {
+        total += Number(maior)
+    } else {
+        total = total
+    }
+
+    if (Number(valorNoturno) > 0) {
+        total += Number(valorNoturno)
+    } else {
+        total = total
+    }
+
+    if (Number(gasto_empregado) > 0) {
+        total += Number(gasto_empregado)
+    } else {
+        total = total
+    }
+    let desconto_inss = CalculoINSS(total)
+    console.log(total)
 
     // RESPOSTAS 
 
     let valor_salario_base = Number(salario)
     let valor_beneficios = Number(total) - Number(salario)
-    let valor_descontos = Number(gasto_empregado)
+    let valor_descontos = Number(gasto_empregado + desconto_inss)
+    let valor_salario_total = (total - valor_descontos)
     let dados1 = document.querySelector('#value-salario-base').innerHTML = `R$ ${valor_salario_base.toFixed(2)}`
     let dados2 = document.querySelector('#value-beneficios').innerHTML = `R$ ${valor_beneficios.toFixed(2)}`
     let dados3 = document.querySelector('#value-descontos').innerHTML = `R$ ${valor_descontos.toFixed(2)}`
      
-    let info1 = document.querySelector("#salario-total").innerHTML = `R$ ${total.toFixed(2)}`
+    let info1 = document.querySelector("#salario-total").innerHTML = `R$ ${valor_salario_total.toFixed(2)}`
     let info2 = document.querySelector("#valor-he").innerHTML = `R$ ${valorHe.toFixed(2)}`
     let info3 = document.querySelector("#valor-dsr").innerHTML = `R$ ${valorDSR.toFixed(2)}`
     let info4 = document.querySelector("#valor-insalubridade").innerHTML = `R$ ${valorInsalubridade.toFixed(2)}`
@@ -179,4 +261,6 @@ botao.addEventListener("click", (e) => {
     let info7 = document.querySelector("#valor-noturno").innerHTML = `R$ ${valorNoturno.toFixed(2)}`
     let info8 = document.querySelector("#valor-vt-empregado").innerHTML = `R$ ${gasto_empregado.toFixed(2)}`
     let info9 = document.querySelector("#valor-vt-empregador").innerHTML = `R$ ${gasto_empregador.toFixed(2)}`
+    let info10 = document.querySelector("#valor-desconto-inss").innerHTML = `R$ ${desconto_inss.toFixed(2)}`
 })
+             
