@@ -77,7 +77,8 @@
 #info6,
 #info7,
 #info8,
-#info9 {
+#info9,
+#info10 {
     padding: 5px;
     background: #f4fdfc;
     width: 130px;
@@ -90,7 +91,8 @@
 #valor-salario-familia,
 #valor-noturno,
 #valor-vt-empregado,
-#valor-vt-empregador {
+#valor-vt-empregador,
+#valor-desconto-inss {
     color: #2a35c0;
 }
 
