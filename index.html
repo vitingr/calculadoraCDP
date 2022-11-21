@@ -78,11 +78,20 @@
                         </div>
                     </p>
                     <p class="nome">
-                        <p class="color">Faltas Horas </p>
+                        <p class="color">Faltas Justificadas (Dias)</p>
                         <div class="flex">
                             <ion-icon name="return-down-forward-outline"></ion-icon>
                             <div class="search">
-                                <input type="number" name="faltas" id="faltas" class="he-info">
+                                <input type="number" name="faltas-justificadas" id="faltas-justificadas" class="he-info" placeholder="1 Dia = 8 Horas">
+                            </div>
+                        </div>
+                    </p>
+                    <p class="nome">
+                        <p class="color">Faltas Injustificadas (Dias)</p>
+                        <div class="flex">
+                            <ion-icon name="return-down-forward-outline"></ion-icon>
+                            <div class="search">
+                                <input type="number" name="faltas-injustificadas" id="faltas-injustificadas" class="he-info" placeholder="1 Dia = 8 Horas">
                             </div>
                         </div>
                     </p>
@@ -117,19 +126,29 @@
                     Salário Família
                     </h2>
                     <p class="nome">
-                        <p class="color">Quantidade Filhos</p>
+                        <p class="color">Quantidade Filhos de Menor (Dependentes)</p>
                         <div class="flex">
                             <ion-icon name="return-down-forward-outline"></ion-icon>
                             <div class="search">
                                 <input type="number" step="1" placeholder="Somente até 14 anos" name="horas-extras" id="qtd-filhos" class="he-info">
                             </div>
                         </div>
+                    </p>
+                    <p class="nome">
+                        <p class="color">Quantidade de Filhos de Maior</p>
+                        <div class="flex">
+                            <ion-icon name="return-down-forward-outline"></ion-icon>
+                            <div class="search">
+                                <input type="number" step="1" placeholder="Acima de 14 anos" name="horas-extras" id="qtd-filhos-maiores" class="he-info">
+                            </div>
+                        </div>
+                    </p>
                 </section>
 
                 <!-- OUTROS ADICIONAIS -->
 
                 <section class="sec5">
-                    <h2 class="h2"><ion-icon name="pricetag-outline"></ion-icon> Outros Adicionais</h2>
+                    <h2 class="h2"><ion-icon name="pricetag-outline"></ion-icon> Outros</h2>
                     <p>
                         <label for="insalubridade">Grau Insalubridade </label> <br>
                         <ion-icon name="return-down-forward-outline"></ion-icon><select name="insalubridade" id="insalubridade">
@@ -150,6 +169,18 @@
                         <label for="horas-noturnas">Qtd. Horas Noturnas </label> <br>
                         <div class="flex">
                             <ion-icon name="return-down-forward-outline"></ion-icon><input type="number" name="horas-noturnas" id="horas-noturnas" class="noturno" placeholder="20% Adicional">
+                        </div>
+                    </p>
+                    <p>
+                        <label for="pensao">DSR a Descontar </label> <br>
+                        <div class="flex">
+                            <ion-icon name="return-down-forward-outline"></ion-icon><input type="number" name="descontar-dsr" id="descontar-dsr" class="noturno" placeholder="Informe a Quantidade">
+                        </div>
+                    </p>
+                    <p>
+                        <label for="pensao">Pensão Alimentícia </label> <br>
+                        <div class="flex">
+                            <ion-icon name="return-down-forward-outline"></ion-icon><input type="number" name="pensao" id="pensao" class="noturno" placeholder="Informe a %">
                         </div>
                     </p>
                 </section>
@@ -197,62 +228,88 @@
                         <p id="value-salario-base">R$ 0.00 </p>
                     </div>
                     <div class="indice2">
-                        Benefícios
+                        Total Vencimentos
                         <p id="value-beneficios">R$ 0.00 </p>
                     </div>
                     <div class="indice3"> 
-                        Descontos
+                        Total Descontos
                         <p id="value-descontos">R$ 0.00</p>
                     </div>
                 </div>
-                <div id="info1">
-                    <p class="text-salario-total">Salario Total</p>
-                    <p id="salario-total"></p>
-                </div>
-                <div class="menu-info">
-                    <div id="info2">
-                        <p class="text-info">Valor HE</p>
-                        <p id="valor-he"></p>
+                <div class="info-container">
+                    <div id="info1">
+                        <p class="text-salario-total">Salario Líquido</p>
+                        <p id="salario-total"></p>
                     </div>
-                    <div id="info3">
-                        <p class="text-info">Valor DSR</p>
-                        <p id="valor-dsr"></p>
+                    <div class="menu-info">
+                        <div id="info2">
+                            <p class="text-info">Valor HE</p>
+                            <p id="valor-he"></p>
+                        </div>
+                        <div id="info3">
+                            <p class="text-info">Valor DSR</p>
+                            <p id="valor-dsr"></p>
+                        </div>
                     </div>
-                </div>
-                <div class="menu-info">
-                    <div id="info4">
-                        <p class="text-info">Insalubridade</p>
-                        <p id="valor-insalubridade"></p>
+                    <div class="menu-info">
+                        <div id="info4">
+                            <p class="text-info">Insalubridade</p>
+                            <p id="valor-insalubridade"></p>
+                        </div>
+                        <div id="info5">
+                            <p class="text-info">Periculosidade</p>
+                            <p id="valor-periculosidade"></p>
+                        </div>
                     </div>
-                    <div id="info5">
-                        <p class="text-info">Periculosidade</p>
-                        <p id="valor-periculosidade"></p>
+                    <div class="menu-info">
+                        <div id="info6">
+                            <p class="text-info">Salário Família</p>
+                            <p id="valor-salario-familia"></p>
+                        </div>
+                        <div id="info7">
+                            <p class="text-info">Adicional Noturno</p>
+                            <p id="valor-noturno"></p>
+                        </div>
                     </div>
-                </div>
-                <div class="menu-info">
-                    <div id="info6">
-                        <p class="text-info">Salário Família</p>
-                        <p id="valor-salario-familia"></p>
+                    <div class="menu-info">
+                        <div id="info8">
+                            <p class="text-info">Gasto VT Empregado</p>
+                            <p id="valor-vt-empregado"></p>
+                        </div>
+                        <div id="info9">
+                            <p class="text-info">Gasto VT Empregador</p>
+                            <p id="valor-vt-empregador"></p>
+                        </div>
                     </div>
-                    <div id="info7">
-                        <p class="text-info">Adicional Noturno</p>
-                        <p id="valor-noturno"></p>
+                    <div class="menu-info">
+                        <div id="info10">
+                            <p class="text-info">Desconto INSS</p>
+                            <p id="valor-desconto-inss"></p>
+                        </div>
+                        <div id="info11">
+                            <p class="text-info">Desconto FGTS</p>
+                            <p id="valor-desconto-fgts"></p>
+                        </div>
                     </div>
-                </div>
-                <div class="menu-info">
-                    <div id="info8">
-                        <p class="text-info">Gasto VT Empregado</p>
-                        <p id="valor-vt-empregado"></p>
+                    <div class="menu-info">
+                        <div id="info12">
+                            <p class="text-info">Desconto do IRRF</p>
+                            <p id="valor-desconto-irrf"></p>
+                        </div>
+                        <div id="info13">
+                            <p class="text-info">Pensão Alimentícia</p>
+                            <p id="valor-desconto-pensao"></p>
+                        </div>
                     </div>
-                    <div id="info9">
-                        <p class="text-info">Gasto VT Empregador</p>
-                        <p id="valor-vt-empregador"></p>
-                    </div>
-                </div>
-                <div class="menu-info">
-                    <div id="info10">
-                        <p class="text-info">Desconto INSS</p>
-                        <p id="valor-desconto-inss"></p>
+                    <div class="menu-info">
+                        <div id="info14">
+                            <p class="text-info">Desconto DSR</p>
+                            <p id="valor-desconto-dsr"></p>
+                        </div>
+                        <div id="info15">
+                            <p class="text-info">Falta / Dia</p>
+                            <p id="valor-desconto-dia"></p>
+                        </div>
                     </div>
                 </div>
             </section>
