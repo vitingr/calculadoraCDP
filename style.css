@@ -78,7 +78,12 @@
 #info7,
 #info8,
 #info9,
-#info10 {
+#info10,
+#info11,
+#info12,
+#info13,
+#info14,
+#info15 {
     padding: 5px;
     background: #f4fdfc;
     width: 130px;
@@ -92,7 +97,12 @@
 #valor-noturno,
 #valor-vt-empregado,
 #valor-vt-empregador,
-#valor-desconto-inss {
+#valor-desconto-inss,
+#valor-desconto-fgts,
+#valor-desconto-irrf,
+#valor-desconto-pensao,
+#valor-desconto-dsr,
+#valor-desconto-dia {
     color: #2a35c0;
 }
 
