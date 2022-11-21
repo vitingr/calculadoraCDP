@@ -24,7 +24,10 @@ function CalculoDSR(valor_he, dias_uteis, dsr) {
 }
 
 // Calculo Insalubridade
-function calculoInsalubridade(insalubridade, jornada, he, faltas) {
+
+function calculoInsalubridade(insalubridade, jornada, he, faltas_justificadas, faltas_injustificadas) {
+    let faltas = totalFaltas(jornada, faltas_justificadas, faltas_injustificadas)
+    console.log(faltas)
     if (insalubridade == 'Não Há Insalubridade') {
         return 0
     } else {
@@ -42,6 +45,19 @@ function calculoInsalubridade(insalubridade, jornada, he, faltas) {
     }
 }
 
+// Calculo Valor Falta
+
+function totalFaltas(jornada, faltas_justificadas, faltas_injustificadas) {
+    console.log(`${jornada}, ${faltas_injustificadas}, ${faltas_justificadas}`)
+    if (jornada == 180) {
+        return ((Number(faltas_injustificadas) + Number(faltas_justificadas)) * 6)
+        
+    } else {
+        if (jornada == 220) {
+            return ((Number(faltas_injustificadas) + Number(faltas_justificadas)) * 8)
+        }
+    }
+}
 
 // Calculo Periculosidade 
 function CalculoPericulosidade(periculosidade, salario) {
@@ -67,7 +83,7 @@ function ValorMaior(v1, v2) {
 
 // Calculo Horas Noturnas
 function CalculoNoturno(sh, horas_noturnas) {
-    return ((sh * 1.14287) * horas_noturnas) * 0.2
+    return (((horas_noturnas / 52.5) * 60) * sh.toFixed(2)) * 0.2
 }
 
 // Calcular Total Horas
@@ -158,8 +174,57 @@ function CalculoINSS(salario_total) {
     }
 }
 
-// Função Não Arrendondar
+// Calculo Falta Dia
+function faltaDia(salario, jornada, faltas_injustificadas) {
+    console.log(`${salario}, ${jornada}, ${faltas_injustificadas}`)
+    return ((salario / jornada) * ((jornada/ 30) * faltas_injustificadas))
+}
 
+// Calculo Falta DSR
+function faltaDSR(salario, jornada, dsr) {
+    console.log(`${salario}, ${jornada}, ${dsr}`)
+    return ((salario / jornada) * ((jornada/ 30) * dsr))
+}
+
+// Calculo Pensão 
+function valorPensao(salario, porcentagemPensao) {
+    return ((salario / 100) * porcentagemPensao)
+}
+
+// Função FGTS 
+function valorFGTS(base) {
+    return ((base / 100) * 8)
+}
+
+// Valor Dependentes 
+function valorDependentes(dependentes) {
+    return (Number(dependentes) * 189.59)
+}
+
+// Valor IRRF 
+function valorIRRF(base) {
+    if (base <= 1903.98) {
+        return 0
+    } else {
+        if (base >= 1903.98 && base <= 2826.65) {
+            return (((base / 100) * 7.5) - 142.80)
+        } else {
+            if (base >= 2826.65 && base <= 3751.05) {
+                return (((base / 100) * 15) - 354.80)
+            } else {
+                if (base >= 3751.05 && base <= 4664.68) {
+                    return (((base / 100) * 22.5) - 636.13)
+                } else {
+                    if (base > 4664.68) {
+                        return (((base / 100) * 27.5) - 869.36)
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Função Não Arrendondar
 function casasDecimais(num, precisao) {
     var casas = Math.pow(10, precisao);
     return Math.floor(num * casas) / casas;
@@ -180,7 +245,8 @@ botao.addEventListener("click", (e) => {
     let jornada = document.querySelector("#jornada").value
     let horas_he = document.querySelector("#horas-extras").value
     let min_he = document.querySelector("#minutos-extras").value
-    let faltas = document.querySelector("#faltas").value
+    let faltas_justificadas = document.querySelector("#faltas-justificadas").value
+    let faltas_injustificadas = document.querySelector("#faltas-injustificadas").value
     let dias_uteis = document.querySelector("#dias-uteis").value
     let dsr =  document.querySelector("#dsr").value
     let insalubridade = document.querySelector("#insalubridade").value
@@ -189,6 +255,9 @@ botao.addEventListener("click", (e) => {
     let filhos = document.querySelector('#qtd-filhos').value
     let valor_passagens = document.querySelector("#valor-passagem").value
     let qtd_passagens = document.querySelector("#qtd-passagens").value
+    let dsrFalta = document.querySelector("#descontar-dsr").value
+    let porcentagemPensao = document.querySelector("#pensao").value
+    let filhos_maiores = document.querySelector('#qtd-filhos-maiores').value
 
     // Cálculos
     let he = HorasMin(horas_he, min_he)
@@ -197,59 +266,80 @@ botao.addEventListener("click", (e) => {
     let valorHe = CalculoHE(sh, porcentagem, he)
     let valorDSR = CalculoDSR(valorHe, dias_uteis, dsr)
     let valorPericulosidade = CalculoPericulosidade(periculosidade, salario)
-    let valorInsalubridade = calculoInsalubridade(insalubridade, jornadaHoras, he, faltas)
+    let valorInsalubridade = calculoInsalubridade(insalubridade, jornadaHoras, he, faltas_justificadas, faltas_injustificadas)
     let maior = ValorMaior(valorPericulosidade, valorInsalubridade)
     let valorNoturno = CalculoNoturno(sh, horas_noturnas)
     let Salario_Familia = SalarioFamilia(salario, filhos)
     let gasto_empregado = GastoEmpregado(salario, valor_passagens, qtd_passagens)
     let gasto_empregador = GastoEmpregador(salario, valor_passagens, qtd_passagens)
-    let total = (Number(salario))
+    let falta_dia = faltaDia(salario, jornadaHoras, faltas_injustificadas)
+    let falta_dsr = faltaDSR(salario, jornadaHoras, dsrFalta)
+    let pensao = valorPensao(salario, porcentagemPensao)
+    let totalVencimentos = (Number(salario))
     if (salario <= 1655.98) {
-        total += Number(Salario_Familia)
+        totalVencimentos += Number(Salario_Familia)
     } else {
         console.log("Não recebe!")
     }
     
     if (Number(valorHe) > 0) {
-        total += Number(valorHe)
+        totalVencimentos += Number(valorHe)
     } else {
-        total = total
+        totalVencimentos = totalVencimentos
     }
 
     if (Number(valorDSR) > 0) {
-        total += Number(valorDSR)
+        totalVencimentos += Number(valorDSR)
     } else {
-        total = total
+        totalVencimentos = totalVencimentos
     }
 
     if (Number(maior) > 0) {
-        total += Number(maior)
+        totalVencimentos += Number(maior)
     } else {
-        total = total
+        totalVencimentos = totalVencimentos
     }
 
     if (Number(valorNoturno) > 0) {
-        total += Number(valorNoturno)
+        totalVencimentos += Number(valorNoturno)
     } else {
-        total = total
+        totalVencimentos = totalVencimentos
     }
 
-    if (Number(gasto_empregado) > 0) {
-        total += Number(gasto_empregado)
+    /*
+    if (Number(falta_dia) > 0) {
+        totalVencimentos -= Number(falta_dia)
     } else {
-        total = total
+        totalVencimentos = totalVencimentos
     }
-    let desconto_inss = CalculoINSS(total)
-    console.log(total)
+
+    if (Number(falta_dsr) > 0) {
+        totalVencimentos -= Number(falta_dsr)
+    } else {
+        totalVencimentos = totalVencimentos
+    } */
+
+    let base_fgts_inss = totalVencimentos - (falta_dia + falta_dsr)
+    let desconto_inss = CalculoINSS(base_fgts_inss)
+    let baseFgts = (totalVencimentos - (falta_dia + falta_dsr))
+    let baseDoIRRF = (totalVencimentos - (falta_dia + falta_dsr))
+    let fgts = valorFGTS(baseFgts)
+    let dependentes = filhos + filhos_maiores
+    let valorDependente = valorDependentes(dependentes)
+    let baseIRRF = (Number(base_fgts_inss) - (Number(desconto_inss) + Number(pensao) + Number(valorDependente)))
+    let irrf = valorIRRF(baseIRRF)
+
+    console.log(base_fgts_inss)
 
     // RESPOSTAS 
 
     let valor_salario_base = Number(salario)
-    let valor_beneficios = Number(total) - Number(salario)
-    let valor_descontos = Number(gasto_empregado + desconto_inss)
-    let valor_salario_total = (total - valor_descontos)
+    let valor_vencimentos = Number(totalVencimentos)
+    let valor_descontos = Number(gasto_empregado + desconto_inss + pensao + irrf + falta_dsr + falta_dia)
+    console.log(valor_descontos)
+    let valor_salario_total = (totalVencimentos - valor_descontos)
     let dados1 = document.querySelector('#value-salario-base').innerHTML = `R$ ${valor_salario_base.toFixed(2)}`
-    let dados2 = document.querySelector('#value-beneficios').innerHTML = `R$ ${valor_beneficios.toFixed(2)}`
+    let dados2 = document.querySelector('#value-beneficios').innerHTML = `R$ ${valor_vencimentos.toFixed(2)}`
     let dados3 = document.querySelector('#value-descontos').innerHTML = `R$ ${valor_descontos.toFixed(2)}`
      
     let info1 = document.querySelector("#salario-total").innerHTML = `R$ ${valor_salario_total.toFixed(2)}`
@@ -262,5 +352,10 @@ botao.addEventListener("click", (e) => {
     let info8 = document.querySelector("#valor-vt-empregado").innerHTML = `R$ ${gasto_empregado.toFixed(2)}`
     let info9 = document.querySelector("#valor-vt-empregador").innerHTML = `R$ ${gasto_empregador.toFixed(2)}`
     let info10 = document.querySelector("#valor-desconto-inss").innerHTML = `R$ ${desconto_inss.toFixed(2)}`
+    let info11 = document.querySelector("#valor-desconto-fgts").innerHTML = `R$ ${fgts.toFixed(2)}`
+    let info12 = document.querySelector("#valor-desconto-irrf").innerHTML = `R$ ${irrf.toFixed(2)}`
+    let info13 = document.querySelector("#valor-desconto-pensao").innerHTML = `R$ ${pensao.toFixed(2)}`
+    let info14 = document.querySelector("#valor-desconto-dsr").innerHTML = `R$ ${falta_dsr.toFixed(2)}`
+    let info15 = document.querySelector("#valor-desconto-dia").innerHTML = `R$ ${falta_dia.toFixed(2)}`
 })
              
