@@ -27,7 +27,6 @@ function CalculoDSR(valor_he, dias_uteis, dsr) {
 
 function calculoInsalubridade(insalubridade, jornada, he, faltas_justificadas, faltas_injustificadas) {
     let faltas = totalFaltas(jornada, faltas_justificadas, faltas_injustificadas)
-    console.log(faltas)
     if (insalubridade == 'Não Há Insalubridade') {
         return 0
     } else {
@@ -48,7 +47,6 @@ function calculoInsalubridade(insalubridade, jornada, he, faltas_justificadas, f
 // Calculo Valor Falta
 
 function totalFaltas(jornada, faltas_justificadas, faltas_injustificadas) {
-    console.log(`${jornada}, ${faltas_injustificadas}, ${faltas_justificadas}`)
     if (jornada == 180) {
         return ((Number(faltas_injustificadas) + Number(faltas_justificadas)) * 6)
         
@@ -145,8 +143,6 @@ function CalculoINSS(salario_total) {
             if (salario_total > 1212 && salario_total <= 2427.35) {
                 let valor1 = salario_total - 1212
                 let valor2 = ((valor1 / 100) * 9)
-                console.log(valor1)
-                console.log(valor2)
                 return (casasDecimais(valor2, 2) + 90.90)
             } else {
                 if (salario_total > 2427.35 && salario_total <= 3641.03) {
@@ -154,10 +150,6 @@ function CalculoINSS(salario_total) {
                     let valor2 = 109.38
                     let valor3 = salario_total - 2427.35
                     let valor4 = ((valor3 / 100) * 12)
-                    console.log(valor1)
-                    console.log(valor2)
-                    console.log(valor3)
-                    console.log(valor4)
                     return ((casasDecimais(valor4, 2)) + 90.90 + 109.38)
                 } else {
                     if (salario_total > 2641.03 <= 7087.22) {
@@ -176,13 +168,11 @@ function CalculoINSS(salario_total) {
 
 // Calculo Falta Dia
 function faltaDia(salario, jornada, faltas_injustificadas) {
-    console.log(`${salario}, ${jornada}, ${faltas_injustificadas}`)
     return ((salario / jornada) * ((jornada/ 30) * faltas_injustificadas))
 }
 
 // Calculo Falta DSR
 function faltaDSR(salario, jornada, dsr) {
-    console.log(`${salario}, ${jornada}, ${dsr}`)
     return ((salario / jornada) * ((jornada/ 30) * dsr))
 }
 
@@ -306,37 +296,22 @@ botao.addEventListener("click", (e) => {
         totalVencimentos = totalVencimentos
     }
 
-    /*
-    if (Number(falta_dia) > 0) {
-        totalVencimentos -= Number(falta_dia)
-    } else {
-        totalVencimentos = totalVencimentos
-    }
-
-    if (Number(falta_dsr) > 0) {
-        totalVencimentos -= Number(falta_dsr)
-    } else {
-        totalVencimentos = totalVencimentos
-    } */
-
     let base_fgts_inss = totalVencimentos - (falta_dia + falta_dsr)
+    let base_irrf = (Number(totalVencimentos) - (Number(falta_dia) + Number(falta_dsr)))
     let desconto_inss = CalculoINSS(base_fgts_inss)
     let baseFgts = (totalVencimentos - (falta_dia + falta_dsr))
     let baseDoIRRF = (totalVencimentos - (falta_dia + falta_dsr))
     let fgts = valorFGTS(baseFgts)
-    let dependentes = filhos + filhos_maiores
+    let dependentes = Number(filhos) + Number(filhos_maiores)
     let valorDependente = valorDependentes(dependentes)
-    let baseIRRF = (Number(base_fgts_inss) - (Number(desconto_inss) + Number(pensao) + Number(valorDependente)))
+    let baseIRRF = (Number(base_irrf) - (Number(desconto_inss) + Number(pensao) + Number(valorDependente)))
     let irrf = valorIRRF(baseIRRF)
-
-    console.log(base_fgts_inss)
 
     // RESPOSTAS 
 
     let valor_salario_base = Number(salario)
     let valor_vencimentos = Number(totalVencimentos)
     let valor_descontos = Number(gasto_empregado + desconto_inss + pensao + irrf + falta_dsr + falta_dia)
-    console.log(valor_descontos)
     let valor_salario_total = (totalVencimentos - valor_descontos)
     let dados1 = document.querySelector('#value-salario-base').innerHTML = `R$ ${valor_salario_base.toFixed(2)}`
     let dados2 = document.querySelector('#value-beneficios').innerHTML = `R$ ${valor_vencimentos.toFixed(2)}`
